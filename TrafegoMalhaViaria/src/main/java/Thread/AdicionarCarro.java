@@ -2,23 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Controller;
+package Thread;
 
 import Model.Direcao;
 import Model.Malha;
-import Model.Monitor;
+import Thread.Monitor;
 import Model.Quadrado;
-import Model.Semaforo;
-import Model.Veiculo;
+import Thread.Semaforo;
+import Thread.Veiculo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 
-/**
- *
- * @author lucas
- */
+ // @author Afonso Uéslei e Lucas Vegini
+
 public final class AdicionarCarro extends Thread {
 
     private boolean emExecucao;

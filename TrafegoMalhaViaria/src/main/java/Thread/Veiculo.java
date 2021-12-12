@@ -2,16 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model;
+package Thread;
 
+import Model.Malha;
+import Model.Malha;
+import Model.Quadrado;
+import Model.Quadrado;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- *
- * @author lucas
- */
+ // @author Afonso Uéslei e Lucas Vegini
+
 public abstract class Veiculo extends Thread {
 
     public String nome;
@@ -153,14 +155,6 @@ public abstract class Veiculo extends Thread {
     public void sairQuadrado() {
         this.quadradoAtual.setCarro(null);
 
-    }
-
-    public boolean pararExecucao() {
-
-        if (!this.quadradoAtual.getMalha().isEmExecucao()) {
-            return true;
-        }
-        return false;
     }
 
     public Quadrado defineProxQuadradoCruzamento(Quadrado q1, Quadrado q2) {

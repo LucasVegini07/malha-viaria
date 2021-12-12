@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model;
+package Thread;
 
-/**
- *
- * @author lucas
- */
+import Model.Quadrado;
+import Thread.Veiculo;
+
+// @author Afonso Uéslei e Lucas Vegini
 public class Monitor extends Veiculo {
 
     public Monitor(String nome, Quadrado quadradoAtual, int velocidadeCarro) {
@@ -89,9 +89,6 @@ public class Monitor extends Veiculo {
         }
 
         while (true) {
-            if (this.pararExecucao()) {
-                break;
-            }
             if (quadradoAtual.isSaida()) {
                 quadradoAtual.setCarro(null);
             } else if (this.emCruzamento) {

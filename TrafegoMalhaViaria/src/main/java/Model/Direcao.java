@@ -4,10 +4,7 @@
  */
 package Model;
 
-/**
- *
- * @author lucas
- */
+// @author Afonso Uéslei e Lucas Vegini
 public enum Direcao {
 
     CIMA(1, "↑"),

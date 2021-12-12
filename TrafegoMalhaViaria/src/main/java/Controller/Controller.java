@@ -4,6 +4,8 @@
  */
 package Controller;
 
+import Thread.AdicionarCarro;
+import Thread.DesenhaMalha;
 import Model.LeitorMalha;
 import Model.Malha;
 import View.Tela;
@@ -13,7 +15,7 @@ import java.io.IOException;
  *
  * @author lucas
  */
-public class ControllerPrincipal {
+public class Controller {
 
     private Tela view;
     private Malha malha;
@@ -45,17 +47,12 @@ public class ControllerPrincipal {
     }
 
     public void pararSimulacao() {
-
         this.addCarro.paraExecucao();
-
     }
 
     public void pararSimulacaoAgora() {
-
         this.addCarro.paraExecucao();
         this.desenhaMalha.paraExecucao();
-        this.malha.paraExecucao();
-
     }
 
 }

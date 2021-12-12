@@ -4,10 +4,10 @@
  */
 package Model;
 
-/**
- *
- * @author lucas
- */
+import Thread.Veiculo;
+
+ // @author Afonso Uéslei e Lucas Vegini
+
 public class Quadrado {
 
     private Veiculo carro;

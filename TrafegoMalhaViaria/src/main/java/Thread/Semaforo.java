@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model;
+package Thread;
 
+import Model.Quadrado;
+import Thread.Veiculo;
 import java.util.concurrent.Semaphore;
 
-/**
- *
- * @author lucas
- */
+// @author Afonso Uéslei e Lucas Vegini
+
 public class Semaforo extends Veiculo {
 
     private final Semaphore semaforo;
@@ -102,9 +102,6 @@ public class Semaforo extends Veiculo {
         }
 
         while (true) {
-            if (this.pararExecucao()) {
-                break;
-            }
             if (quadradoAtual.isSaida()) {
                 quadradoAtual.setCarro(null);
             } else if (this.emCruzamento) {

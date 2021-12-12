@@ -4,37 +4,30 @@
  */
 package View;
 
-import Controller.ControllerPrincipal;
+import Controller.Controller;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-/**
- *
- * @author lucas
- */
+// @author Afonso Uéslei e Lucas Vegini
 public class Tela extends javax.swing.JFrame {
 
-    private ControllerPrincipal controllerView;
+    private Controller controllerView;
 
     /**
      * Creates new form Tela
      */
     public Tela() {
         initComponents();
-        myInitComponents();
         this.initController();
 
     }
 
-    public void myInitComponents() {
-    }
-
     public void initController() {
 
-        this.controllerView = new ControllerPrincipal();
+        this.controllerView = new Controller();
         this.controllerView.setView(this);
 
     }

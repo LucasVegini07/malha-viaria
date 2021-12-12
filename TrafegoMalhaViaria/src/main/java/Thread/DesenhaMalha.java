@@ -2,17 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Controller;
+package Thread;
 
 import Model.Malha;
 import Model.Quadrado;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
-/**
- *
- * @author lucas
- */
+// @author Afonso Uéslei e Lucas Vegini
 public class DesenhaMalha extends Thread {
 
     private boolean emExecucao;
@@ -49,6 +45,7 @@ public class DesenhaMalha extends Thread {
                     if (quadrado.getDirecao() == null) {
                         printLinha += "  ";
                     } else {
+//                        printLinha += (quadrado.getCarro() != null ? quadrado.getCarro().getNome() : quadrado.getReservado() != null ? quadrado.getReservado().getNome() : quadrado.getDirecao().getCaracterExibicao());
                         printLinha += (quadrado.getCarro() != null ? quadrado.getCarro().getNome() : quadrado.getDirecao().getCaracterExibicao());
                         printLinha += " ";
                     }
