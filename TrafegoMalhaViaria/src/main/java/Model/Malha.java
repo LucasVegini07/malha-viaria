@@ -22,15 +22,11 @@ public class Malha {
     }
 
     public void setMalhas(Quadrado[][] malhas) {
-
         this.quadrados = malhas;
-
     }
 
     public Quadrado[][] getMalhas() {
-
         return this.quadrados;
-
     }
 
 }

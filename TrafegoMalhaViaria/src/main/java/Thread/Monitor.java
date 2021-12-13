@@ -15,12 +15,11 @@ public class Monitor extends Veiculo {
     }
 
     public void andar(Quadrado destino) {
-        if (destino.getCarro() != null) {
-            return;
+        if (destino.getCarro() == null) {
+            this.quadradoAtual.setCarro(null);
+            this.quadradoAtual = destino;
+            this.quadradoAtual.setCarro(this);
         }
-        this.quadradoAtual.setCarro(null);
-        this.quadradoAtual = destino;
-        this.quadradoAtual.setCarro(this);
     }
 
     public void trataAndarReto(Quadrado destino) {
@@ -58,10 +57,7 @@ public class Monitor extends Veiculo {
     public synchronized void tentaReservarCruzamento() {
 
         for (Quadrado quadrado : caminhoCruzamento) {
-            if (quadrado.getCarro() != null) {
-                return;
-            }
-            if (quadrado.getReservado() != null) {
+            if (quadrado.getCarro() != null || quadrado.getReservado() != null) {
                 return;
             }
         }

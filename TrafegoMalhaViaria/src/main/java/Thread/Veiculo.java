@@ -16,22 +16,22 @@ import java.util.Random;
 
 public abstract class Veiculo extends Thread {
 
-    public String nome;
-    public Quadrado quadradoAtual;
-    public boolean emCruzamento;
-    public boolean podeAndarCruzamento;
-    public List<Quadrado> caminhoCruzamento;
-    public final int velocidadeCarro;
+    public       String         nome;
+    public       Quadrado       quadradoAtual;
+    public       boolean        emCruzamento;
+    public       boolean        podeAndarCruzamento;
+    public       List<Quadrado> caminhoCruzamento;
+    public final int            velocidadeCarro;
 
-    public Random random;
+    public       Random         random;
 
     public Veiculo(String nome, Quadrado quadradoAtual, int velocidadeCarro) {
-        this.nome = nome;
-        this.quadradoAtual = quadradoAtual;
-        this.emCruzamento = false;
+        this.nome              = nome;
+        this.quadradoAtual     = quadradoAtual;
+        this.emCruzamento      = false;
         this.caminhoCruzamento = new ArrayList<Quadrado>();
-        this.random = new Random();
-        this.velocidadeCarro = velocidadeCarro;
+        this.random            = new Random();
+        this.velocidadeCarro   = velocidadeCarro;
     }
 
     public String getNome() {
@@ -72,49 +72,49 @@ public abstract class Veiculo extends Thread {
     }
 
     public Quadrado getQuadradoCima() {
-        Malha malha = this.quadradoAtual.getMalha();
+        Malha    malha   = this.quadradoAtual.getMalha();
         Quadrado destino = malha.getMalha(this.quadradoAtual.getX() - 1, this.quadradoAtual.getY());
         return destino;
     }
 
     public Quadrado getQuadradoEsquerda() {
-        Malha malha = this.quadradoAtual.getMalha();
+        Malha    malha   = this.quadradoAtual.getMalha();
         Quadrado destino = malha.getMalha(this.quadradoAtual.getX(), this.quadradoAtual.getY() - 1);
         return destino;
     }
 
     public Quadrado getQuadradoAbaixo() {
-        Malha malha = this.quadradoAtual.getMalha();
+        Malha    malha   = this.quadradoAtual.getMalha();
         Quadrado destino = malha.getMalha(this.quadradoAtual.getX() + 1, this.quadradoAtual.getY());
         return destino;
     }
 
     public Quadrado getQuadradoDireita() {
-        Malha malha = this.quadradoAtual.getMalha();
+        Malha    malha   = this.quadradoAtual.getMalha();
         Quadrado destino = malha.getMalha(this.quadradoAtual.getX(), this.quadradoAtual.getY() + 1);
         return destino;
     }
 
     public Quadrado getQuadradoCimaRef(Quadrado q) {
-        Malha malha = q.getMalha();
+        Malha    malha   = q.getMalha();
         Quadrado destino = malha.getMalha(q.getX() - 1, q.getY());
         return destino;
     }
 
     public Quadrado getQuadradoEsquerdaRef(Quadrado q) {
-        Malha malha = q.getMalha();
+        Malha    malha   = q.getMalha();
         Quadrado destino = malha.getMalha(q.getX(), q.getY() - 1);
         return destino;
     }
 
     public Quadrado getQuadradoAbaixoRef(Quadrado q) {
-        Malha malha = q.getMalha();
+        Malha    malha   = q.getMalha();
         Quadrado destino = malha.getMalha(q.getX() + 1, q.getY());
         return destino;
     }
 
     public Quadrado getQuadradoDireitaRef(Quadrado q) {
-        Malha malha = q.getMalha();
+        Malha    malha   = q.getMalha();
         Quadrado destino = malha.getMalha(q.getX(), q.getY() + 1);
         return destino;
     }
@@ -165,21 +165,16 @@ public abstract class Veiculo extends Thread {
         if (caminhoCruzamento.contains(q2)) {
             return q1;
         }
-
-        if (random.nextInt(2) == 0) {
-            return q1;
-        } else {
-            return q2;
-        }
+        return random.nextInt(2) == 0 ? q1 : q2;
     }
 
     public void defineCaminhoCruzamento(Quadrado quadradoIniCruzamento) {
         caminhoCruzamento.removeAll(caminhoCruzamento);
         caminhoCruzamento.add(quadradoIniCruzamento);
         Quadrado proxQuadrado = quadradoIniCruzamento;
-        Quadrado q1 = null;
-        Quadrado q2 = null;
-        while (true) {
+        Quadrado q1           = null;
+        Quadrado q2           = null;
+        while (true && proxQuadrado.isCruzamento()) {
             switch (proxQuadrado.getDirecao()) {
                 case CRUZAMENTO_CIMA:
                     proxQuadrado = this.getQuadradoCimaRef(proxQuadrado);
@@ -194,30 +189,27 @@ public abstract class Veiculo extends Thread {
                     proxQuadrado = this.getQuadradoDireitaRef(proxQuadrado);
                     break;
                 case CRUZAMENTO_BAIXO_DIREITA:
-                    q1 = this.getQuadradoAbaixoRef(proxQuadrado);
-                    q2 = this.getQuadradoDireitaRef(proxQuadrado);
+                    q1           = this.getQuadradoAbaixoRef(proxQuadrado);
+                    q2           = this.getQuadradoDireitaRef(proxQuadrado);
                     proxQuadrado = defineProxQuadradoCruzamento(q1, q2);
                     break;
                 case CRUZAMENTO_BAIXO_ESQUERDA:
-                    q1 = this.getQuadradoAbaixoRef(proxQuadrado);
-                    q2 = this.getQuadradoEsquerdaRef(proxQuadrado);
+                    q1           = this.getQuadradoAbaixoRef(proxQuadrado);
+                    q2           = this.getQuadradoEsquerdaRef(proxQuadrado);
                     proxQuadrado = defineProxQuadradoCruzamento(q1, q2);
                     break;
                 case CRUZAMENTO_CIMA_DIRETIA:
-                    q1 = this.getQuadradoCimaRef(proxQuadrado);
-                    q2 = this.getQuadradoDireitaRef(proxQuadrado);
+                    q1           = this.getQuadradoCimaRef(proxQuadrado);
+                    q2           = this.getQuadradoDireitaRef(proxQuadrado);
                     proxQuadrado = defineProxQuadradoCruzamento(q1, q2);
                     break;
                 case CRUZAMENTO_CIMA_ESQUERDA:
-                    q1 = this.getQuadradoCimaRef(proxQuadrado);
-                    q2 = this.getQuadradoEsquerdaRef(proxQuadrado);
+                    q1           = this.getQuadradoCimaRef(proxQuadrado);
+                    q2           = this.getQuadradoEsquerdaRef(proxQuadrado);
                     proxQuadrado = defineProxQuadradoCruzamento(q1, q2);
                     break;
             }
             caminhoCruzamento.add(proxQuadrado);
-            if (!proxQuadrado.isCruzamento()) {
-                break;
-            }
         }
     }
 

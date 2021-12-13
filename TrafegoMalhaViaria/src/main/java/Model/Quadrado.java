@@ -14,15 +14,15 @@ public class Quadrado {
     private Veiculo reservado;
     private Direcao direcao;
     private boolean saida;
-    private int x;
-    private int y;
-    private Malha malha;
+    private int     x;
+    private int     y;
+    private Malha   malha;
 
     public Quadrado(Direcao direcao, int x, int y) {
-        this.malha = malha;
+        this.malha   = malha;
         this.direcao = direcao;
-        this.x = x;
-        this.y = y;
+        this.x       = x;
+        this.y       = y;
     }
 
     public boolean isSaida() {
@@ -84,13 +84,13 @@ public class Quadrado {
     public boolean isCruzamento() {
 
         return this.direcao == Direcao.CRUZAMENTO_CIMA
-                || this.direcao == Direcao.CRUZAMENTO_BAIXO
-                || this.direcao == Direcao.CRUZAMENTO_DIREITA
-                || this.direcao == Direcao.CRUZAMENTO_ESQUERDA
-                || this.direcao == Direcao.CRUZAMENTO_BAIXO_DIREITA
-                || this.direcao == Direcao.CRUZAMENTO_BAIXO_ESQUERDA
-                || this.direcao == Direcao.CRUZAMENTO_CIMA_DIRETIA
-                || this.direcao == Direcao.CRUZAMENTO_CIMA_ESQUERDA;
+            || this.direcao == Direcao.CRUZAMENTO_BAIXO
+            || this.direcao == Direcao.CRUZAMENTO_DIREITA
+            || this.direcao == Direcao.CRUZAMENTO_ESQUERDA
+            || this.direcao == Direcao.CRUZAMENTO_BAIXO_DIREITA
+            || this.direcao == Direcao.CRUZAMENTO_BAIXO_ESQUERDA
+            || this.direcao == Direcao.CRUZAMENTO_CIMA_DIRETIA
+            || this.direcao == Direcao.CRUZAMENTO_CIMA_ESQUERDA;
 
     }
 

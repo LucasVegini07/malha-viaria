@@ -19,39 +19,35 @@ import java.util.concurrent.Semaphore;
 
 public final class AdicionarCarro extends Thread {
 
-    private boolean emExecucao;
-    private final Malha malha;
+    private       boolean        emExecucao;
+    private final Malha          malha;
     private final List<Quadrado> listQuadradosEntrada;
-    private final int qtdTotalCarros;
-    private final Semaphore semaforoPrincipal;
-    private final int tempoInsercao;
-    private final Random random;
-    private final String tipo;
-    private final int velocidadeCarro;
+    private final int            qtdTotalCarros;
+    private final Semaphore      semaforoPrincipal;
+    private final int            tempoInsercao;
+    private final Random         random;
+    private final String         tipo;
+    private final int            velocidadeCarro;
 
     public AdicionarCarro(Malha malha, int qtdTotalCarros, int tempoInsercao, String tipo, int velocidadeCarro) {
-        this.emExecucao = true;
-        this.malha = malha;
-        this.semaforoPrincipal = new Semaphore(1);
+        this.emExecucao           = true;
+        this.malha                = malha;
+        this.semaforoPrincipal    = new Semaphore(1);
         this.listQuadradosEntrada = new ArrayList<Quadrado>();
-        this.qtdTotalCarros = qtdTotalCarros;
-        this.tempoInsercao = tempoInsercao;
-        this.random = new Random();
-        this.tipo = tipo;
-        this.velocidadeCarro = velocidadeCarro;
+        this.qtdTotalCarros       = qtdTotalCarros;
+        this.tempoInsercao        = tempoInsercao;
+        this.random               = new Random();
+        this.tipo                 = tipo;
+        this.velocidadeCarro      = velocidadeCarro;
         this.setQuadradosEntradaSaida();
     }
 
     public void paraExecucao() {
-
         this.emExecucao = false;
-
     }
 
     private String getIdentificadorCarro() {
-
         char c = (char) (random.nextInt(26) + 'a');
-
         return c + "";
     }
 
@@ -61,7 +57,7 @@ public final class AdicionarCarro extends Thread {
 
         for (int x = 0; x < matrizQuadrados[0].length; x++) {
 
-            Quadrado qCima = matrizQuadrados[0][x];
+            Quadrado qCima  = matrizQuadrados[0][x];
             Quadrado qBaixo = matrizQuadrados[matrizQuadrados.length - 1][x];
 
             if (qCima != null && qCima.getDirecao() == Direcao.BAIXO) {
@@ -83,11 +79,10 @@ public final class AdicionarCarro extends Thread {
 
         for (int x = 0; x < matrizQuadrados.length; x++) {
 
-            Quadrado qDireita = matrizQuadrados[x][matrizQuadrados[0].length - 1];
+            Quadrado qDireita  = matrizQuadrados[x][matrizQuadrados[0].length - 1];
             Quadrado qEsquerda = matrizQuadrados[x][0];
 
             if (qDireita != null && qDireita.getDirecao() == Direcao.ESQUERDA) {
-
                 this.listQuadradosEntrada.add(qDireita);
             }
 
@@ -107,16 +102,17 @@ public final class AdicionarCarro extends Thread {
 
     @Override
     public void run() {
-        int veiculos = 0;
-        Veiculo veiculo;
+        int      veiculos = 0;
+        Veiculo  veiculo;
         Quadrado quadradoEntrada;
-        while (this.emExecucao) {
+        while(this.emExecucao && veiculos != qtdTotalCarros) {
 
             quadradoEntrada = this.listQuadradosEntrada.get(random.nextInt(this.listQuadradosEntrada.size()));
 
             if (tipo.equals("Semáforo")) {
                 veiculo = new Semaforo(this.semaforoPrincipal, this.getIdentificadorCarro(), quadradoEntrada, velocidadeCarro);
-            } else {
+            }
+            else {
                 veiculo = new Monitor(this.getIdentificadorCarro(), quadradoEntrada, velocidadeCarro);
             }
             if (quadradoEntrada.getCarro() == null) {
@@ -128,12 +124,6 @@ public final class AdicionarCarro extends Thread {
                 }
                 veiculos++;
             }
-
-            if (veiculos == qtdTotalCarros) {
-                break;
-
-            }
-
         }
 
     }

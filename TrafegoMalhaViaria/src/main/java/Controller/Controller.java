@@ -17,10 +17,10 @@ import java.io.IOException;
  */
 public class Controller {
 
-    private Tela view;
-    private Malha malha;
+    private Tela           view;
+    private Malha          malha;
     private AdicionarCarro addCarro;
-    private DesenhaMalha desenhaMalha;
+    private DesenhaMalha   desenhaMalha;
 
     public void setView(Tela view) {
         this.view = view;
@@ -30,19 +30,17 @@ public class Controller {
         LeitorMalha leitor = new LeitorMalha(caminho);
         try {
             this.malha = leitor.lerArquivo();
-
-        } catch (IOException ex) {
-        }
-        desenhaMalha = new DesenhaMalha(this.view.getTextArea(), this.malha);
+        } 
+        catch (IOException ex) {}
+        
+        desenhaMalha      = new DesenhaMalha(this.view.getTextArea(), this.malha);
         this.desenhaMalha = desenhaMalha;
         desenhaMalha.start();
-
     }
 
     public void iniciaSimulacao(int qtdTotalCarros, int tempoInsercao, String tipo, int velocidadeCarro) {
-
         AdicionarCarro addCarroLocal = new AdicionarCarro(this.malha, qtdTotalCarros, tempoInsercao, tipo, velocidadeCarro);
-        this.addCarro = addCarroLocal;
+        this.addCarro                = addCarroLocal;
         addCarroLocal.start();
     }
 

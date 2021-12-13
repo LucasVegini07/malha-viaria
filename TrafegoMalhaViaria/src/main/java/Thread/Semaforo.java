@@ -20,12 +20,11 @@ public class Semaforo extends Veiculo {
     }
 
     public void andar(Quadrado destino) {
-        if (destino.getCarro() != null) {
-            return;
+        if (destino.getCarro() == null) {
+            this.quadradoAtual.setCarro(null);
+            this.quadradoAtual = destino;
+            this.quadradoAtual.setCarro(this);
         }
-        this.quadradoAtual.setCarro(null);
-        this.quadradoAtual = destino;
-        this.quadradoAtual.setCarro(this);
     }
 
     public void trataAndarReto(Quadrado destino) {
@@ -68,11 +67,7 @@ public class Semaforo extends Veiculo {
         }
 
         for (Quadrado quadrado : caminhoCruzamento) {
-            if (quadrado.getCarro() != null) {
-                this.semaforo.release();
-                return;
-            }
-            if (quadrado.getReservado() != null) {
+            if (quadrado.getCarro() != null || quadrado.getReservado() != null) {
                 this.semaforo.release();
                 return;
             }

@@ -11,57 +11,45 @@ import javax.swing.JTextArea;
 // @author Afonso Uéslei e Lucas Vegini
 public class DesenhaMalha extends Thread {
 
-    private boolean emExecucao;
+    private boolean   emExecucao;
     private JTextArea textArea;
-    private Malha malha;
+    private Malha     malha;
 
     public DesenhaMalha(JTextArea textArea, Malha malha) {
         this.emExecucao = true;
-        this.textArea = textArea;
-        this.malha = malha;
+        this.textArea   = textArea;
+        this.malha      = malha;
     }
 
     public void paraExecucao() {
-
         this.emExecucao = false;
-
     }
 
     @Override
     public void run() {
-
         Quadrado[][] malhaAux = this.malha.getMalhas();
 
         String printLinha = "";
         while (this.emExecucao) {
-
             printLinha = "";
 
             for (int i = 0; i < malhaAux.length; i++) {
                 for (int j = 0; j < malhaAux[i].length; j++) {
-
                     Quadrado quadrado = malhaAux[i][j];
-
                     if (quadrado.getDirecao() == null) {
                         printLinha += "  ";
                     } else {
-//                        printLinha += (quadrado.getCarro() != null ? quadrado.getCarro().getNome() : quadrado.getReservado() != null ? quadrado.getReservado().getNome() : quadrado.getDirecao().getCaracterExibicao());
                         printLinha += (quadrado.getCarro() != null ? quadrado.getCarro().getNome() : quadrado.getDirecao().getCaracterExibicao());
                         printLinha += " ";
                     }
-
                 }
-
                 printLinha += "\n";
-
             }
             this.textArea.setText(printLinha);
 
             try {
                 this.sleep(50);
-            } catch (InterruptedException ex) {
-            }
-
+            } catch (InterruptedException ex) {}
         }
 
     }

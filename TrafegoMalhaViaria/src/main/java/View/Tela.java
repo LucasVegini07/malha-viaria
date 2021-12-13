@@ -22,14 +22,11 @@ public class Tela extends javax.swing.JFrame {
     public Tela() {
         initComponents();
         this.initController();
-
     }
 
     public void initController() {
-
         this.controllerView = new Controller();
         this.controllerView.setView(this);
-
     }
 
     public JTextArea getTextArea() {
@@ -209,14 +206,15 @@ public class Tela extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Número de veículos não pode ser vazio");
             return;
         }
-
         if (tfVelocidadeInsercao.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Velocidade de inserção não pode ser vazio");
             return;
         }
+        
         try {
             this.controllerView.iniciaSimulacao(Integer.parseInt(tfQtdVeiculos.getText()), Integer.parseInt(tfVelocidadeInsercao.getText()), (String) this.cbTipo.getSelectedItem(), Integer.parseInt(this.tfVelocidaVeículos.getText()));
-        } catch (NumberFormatException ex) {
+        } 
+        catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Valor do campo de texto precisa ser númerico!");
             ex.printStackTrace();
         }
@@ -229,15 +227,12 @@ public class Tela extends javax.swing.JFrame {
         fileChoser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int Select = fileChoser.showSaveDialog(null);
 
-        if (Select == JFileChooser.CANCEL_OPTION) {
-
-        } else {
+        if (Select != JFileChooser.CANCEL_OPTION) {
             File arquivo = fileChoser.getSelectedFile();
             this.controllerView.CriaMalha(arquivo.getPath());
             this.btStart.setEnabled(true);
             this.btEncerrar.setEnabled(true);
             this.btEncerrarNow.setEnabled(true);
-
         }
 
     }//GEN-LAST:event_btSelectMalha1ActionPerformed
@@ -246,19 +241,15 @@ public class Tela extends javax.swing.JFrame {
     }//GEN-LAST:event_tfQtdVeiculosActionPerformed
 
     private void btEncerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEncerrarActionPerformed
-
         this.controllerView.pararSimulacao();
         this.btEncerrar.setEnabled(false);
         this.btEncerrarNow.setEnabled(false);
-
     }//GEN-LAST:event_btEncerrarActionPerformed
 
     private void btEncerrarNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEncerrarNowActionPerformed
-
         this.controllerView.pararSimulacaoAgora();
         this.btEncerrar.setEnabled(false);
         this.btEncerrarNow.setEnabled(false);
-
     }//GEN-LAST:event_btEncerrarNowActionPerformed
 
     private void tfVelocidaVeículosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfVelocidaVeículosActionPerformed

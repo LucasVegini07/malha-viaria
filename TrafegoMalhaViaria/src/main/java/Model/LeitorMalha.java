@@ -13,9 +13,9 @@ import java.io.IOException;
 
 public class LeitorMalha {
 
-    private int quadrado[][];
+    private       int    quadrado[][];
     private final String diretorio;
-    private Malha malha;
+    private       Malha  malha;
 
     public LeitorMalha(String diretorio) {
         this.diretorio = diretorio;
@@ -27,8 +27,7 @@ public class LeitorMalha {
 
         try {
             buffRead = new BufferedReader(new FileReader(this.diretorio));
-        } catch (FileNotFoundException ex) {
-        }
+        } catch (FileNotFoundException ex) {}
 
         if (buffRead == null) {
             return null;
@@ -52,9 +51,9 @@ public class LeitorMalha {
                     malha.setMalha(x, y, null);
                 }
 
-                Direcao direcao = getDirecao(quadrado[x][y]);
-
+                Direcao  direcao  = getDirecao(quadrado[x][y]);
                 Quadrado quadrado = new Quadrado(direcao, x, y);
+                
                 malha.setMalha(x, y, quadrado);
             }
 
@@ -71,33 +70,30 @@ public class LeitorMalha {
 
     public void setMalhaTamanho(BufferedReader buffRead) throws IOException {
 
-        String strQtdLinhas = buffRead.readLine().trim();
+        String strQtdLinhas  = buffRead.readLine().trim();
         String strQtdColunas = buffRead.readLine().trim();
 
-        int qtdLinhas = Integer.parseInt(strQtdLinhas);
+        int qtdLinhas  = Integer.parseInt(strQtdLinhas);
         int qtdColunas = Integer.parseInt(strQtdColunas);
 
         this.quadrado = new int[qtdLinhas][qtdColunas];
-        this.malha = new Malha(qtdLinhas, qtdColunas);
+        this.malha    = new Malha(qtdLinhas, qtdColunas);
 
     }
 
     public void setMalhaDirecao(BufferedReader buffRead) throws IOException {
 
         String srtLinha = buffRead.readLine();
-
-        int numLinha = 0;
+        int    numLinha = 0;
 
         while (srtLinha != null) {
-
             String[] numerosLinha = srtLinha.split("\t");
 
             this.setDirecaoLinha(numLinha, this.linhaStringToInt(numerosLinha));
-
+ 
             numLinha++;
 
             srtLinha = buffRead.readLine();
-
         }
 
     }
@@ -105,10 +101,9 @@ public class LeitorMalha {
     public void setDirecaoLinha(int x, int[] linha) {
 
         for (int y = 0; y < this.quadrado[x].length; y++) {
-
             this.quadrado[x][y] = linha[y];
-
         }
+        
     }
 
     public int[] linhaStringToInt(String[] linha) {
@@ -116,9 +111,7 @@ public class LeitorMalha {
         int[] linhaInt = new int[linha.length];
 
         for (int x = 0; x < linha.length; x++) {
-
             linhaInt[x] = Integer.parseInt(linha[x]);
-
         }
 
         return linhaInt;
